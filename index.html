@@ -7,23 +7,36 @@
   html, body { height: 100%; margin: 0; padding: 0; }
   #map { height: 100%; }
 </style>
+
+<script src="js-frameworks/knockout.js"></script>
+
 </head>
+
 <body>
   <div id="map"></div>
 
+  <script src="js/map.js"></script>
 
   <script type="text/javascript">
+    var myLatLng = {lat: 51.501476, lng: -0.140634};
+
     function initMap() {
       // Create a map object and specify the DOM element for display.
       var map = new google.maps.Map(document.getElementById('map'), {
-        center: {lat: 51.528307984912544, lng: -0.3817765050863085},
-        scrollwheel: false,
-        zoom: 8
+        center: myLatLng,
+        zoom: 5
+      });
+
+      var marker = new google.maps.Marker({
+        position: myLatLng,
+        map: map,
+        title: 'Buckingham Palace'
       });
     }
   </script>
 
-  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDO11YUjfobraQtsvn9WNyXjQs3hkPGugE&callback=initMap">
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDO11YUjfobraQtsvn9WNyXjQs3hkPGugE&callback=initMap">
   </script>
 </body>
+
 </html>
