@@ -1,0 +1,19 @@
+{
+  "name": "p5",
+  "homepage": "https://github.com/ericmartz/P5-NeighborhoodMap",
+  "authors": [
+    "Eric Martz <ericmartz@gmail.com>"
+  ],
+  "description": "Udacity's Project #5 - Neighborhood Map",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
