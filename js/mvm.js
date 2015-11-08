@@ -71,7 +71,7 @@ var MapPoint = function(data) {
 var ViewModel = function() {
   var self = this;
 
-  this.mapPointsList = ko.observableArray([]);
+  self.mapPointsList = ko.observableArray([]);
 
   mapPoints.forEach(function(mapPoint){
     self.mapPointsList.push(new MapPoint(mapPoint));
@@ -118,6 +118,10 @@ var ViewModel = function() {
       toggleMarkerVisible(self.search()[i].mapLocationAddress());
     }
   });
+
+  self.markerAnimation = function(marker){
+    bounceMarker(marker.mapLocationAddress());
+  };
 }
 
 ko.applyBindings(new ViewModel());

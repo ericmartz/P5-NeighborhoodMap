@@ -190,3 +190,21 @@ function toggleMarkerVisible(marker){
     }
   }
 }
+
+// I am using a loop here, but I feel like there has to be a way to do this that costs less in terms
+// of computer resources.
+// TODO: Find out a way to do this without a loop.
+function bounceMarker(marker){
+  for(var i=0; i < mapMarkers.length; i++){
+    if(marker === mapMarkers[i].title){
+      mapMarkers[i].setAnimation(google.maps.Animation.BOUNCE);
+      stopMarkerAnimation(i, 1400);
+    }
+  }
+}
+
+// For this function, got some at the google maps API and here:
+// http://stackoverflow.com/questions/7339200/bounce-a-pin-in-google-maps-once
+function stopMarkerAnimation(marker, timeout){
+  setTimeout(function(){ mapMarkers[marker].setAnimation(null); }, timeout);
+}

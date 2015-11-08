@@ -13,7 +13,8 @@
     <h1>Places in Atlanta</h1>
     <input id="s-input" class="controls" type="search" data-bind="textInput: query, valueUpdate: 'keyup'"></input>
     <ul data-bind="foreach: search">
-      <li data-bind="text: mapLocation"></li>
+      <li data-bind="text: mapLocation, click: $parent.markerAnimation">
+      </li>
     </ul>
   </div>
   <div id="map"></div>
