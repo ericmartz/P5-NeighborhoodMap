@@ -3,18 +3,19 @@
 <head>
 <title>Udacity's 5th Project | A Neighborhood Map</title>
 
-<style type="text/css">
-  html, body { height: 100%; margin: 0; padding: 0; }
-  #map { height: 100%; }
-</style>
-
+<link rel="stylesheet" href="css/main.css">
 <script src="js-frameworks/knockout.js"></script>
-
-
 
 </head>
 
 <body>
+  <div id="list-view">
+    <h1>Places in Atlanta</h1>
+    <input id="s-input" class="controls" type="search" data-bind="textInput: query, valueUpdate: 'keyup'"></input>
+    <ul data-bind="foreach: search">
+      <li data-bind="text: mapLocation"></li>
+    </ul>
+  </div>
   <div id="map"></div>
 
   <!-- <script type="text/javascript">
@@ -36,10 +37,10 @@
     }
   </script> -->
 
-  <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places"></script>
+  <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places"></script> 
   <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDO11YUjfobraQtsvn9WNyXjQs3hkPGugE&callback=initMap&?libraries=places"></script> -->
-  <script src="js/helper.js"></script>
   <script src="js/map.js"></script>
+  <script src="js/mvm.js"></script>
 </body>
 
   
