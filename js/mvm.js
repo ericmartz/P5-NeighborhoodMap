@@ -120,7 +120,7 @@ var ViewModel = function() {
   });
 
   self.markerAnimation = function(marker){
-    bounceMarker(marker.mapLocationAddress());
+    animateMarker(marker.mapLocationAddress());
   };
 }
 

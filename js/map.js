@@ -194,7 +194,7 @@ function toggleMarkerVisible(marker){
 // I am using a loop here, but I feel like there has to be a way to do this that costs less in terms
 // of computer resources.
 // TODO: Find out a way to do this without a loop.
-function bounceMarker(marker){
+function animateMarker(marker){
   for(var i=0; i < mapMarkers.length; i++){
     if(marker === mapMarkers[i].title){
       mapMarkers[i].setAnimation(google.maps.Animation.BOUNCE);
