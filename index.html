@@ -20,27 +20,13 @@
   <div id="map"></div>
 
   <script type="text/javascript">
-    var myLatLng = {lat: 33.748995, lng: -84.387982};
+    
+      </script>
 
-    function initMap() {
-      // Create a map object and specify the DOM element for display.
-      map = new google.maps.Map(document.querySelector('#map'), mapOptions);
-      // var map = new google.maps.Map(document.getElementById('map'), {
-      //   center: myLatLng,
-      //   zoom: 5
-      // });
 
-      var marker = new google.maps.Marker({
-        position: myLatLng,
-        map: map,
-        title: 'Atlanta, GA'
-      });
-    }
-  </script>
-
-  <!-- <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places"></script> -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDO11YUjfobraQtsvn9WNyXjQs3hkPGugE&callback=initMap&?libraries=places"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDO11YUjfobraQtsvn9WNyXjQs3hkPGugE"></script>
   <script src="js/map.js"></script>
+  <script type="text/javascript">initMap();</script>
   <script src="js/mvm.js"></script>
 </body>
 
