@@ -1,17 +1,19 @@
 var map;
 var mapMarkers = [];
+var bounds = new google.maps.LatLngBounds();
 
 function initMap() {
   // Create a map object and specify the DOM element for display.
   map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 33.74900, lng: -84.38798},
-    scrollwheel: false,
-    zoom: 12
+    scrollwheel: false
+    //zoom: 12
   });
 
 }
 
 function addMapMarkers(mapPoint){
+
   var marker = new google.maps.Marker({
     position: {lat: mapPoint.mapLatitude(), lng: mapPoint.mapLongitude()},
     map: map,
@@ -20,6 +22,11 @@ function addMapMarkers(mapPoint){
 
   mapMarkers.push(marker);
   marker.setMap(map);
+
+  // Got this from a couple articles I read, and then also the code in Project 2 
+  bounds.extend(new google.maps.LatLng(mapPoint.mapLatitude(), mapPoint.mapLongitude()));
+  map.fitBounds(bounds);
+  map.setCenter(bounds.getCenter());
 }
 
 function toggleMarkersInvisible(){
