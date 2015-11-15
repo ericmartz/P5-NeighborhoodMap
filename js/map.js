@@ -1,6 +1,14 @@
 var map;
 var mapMarkers = [];
 var bounds = new google.maps.LatLngBounds();
+var infoWindow = new google.maps.InfoWindow();
+
+function getInfoWindowContent(header, content) {
+  var windowContent = '';
+  windowContent += '<h3>' + header + '</h3>';
+  windowContent += '<p>' + content + '</p>'
+  return windowContent;
+}
 
 function initMap() {
   // Create a map object and specify the DOM element for display.
@@ -9,7 +17,6 @@ function initMap() {
     scrollwheel: false
     //zoom: 12
   });
-
 }
 
 function addMapMarkers(mapPoint){
@@ -22,6 +29,11 @@ function addMapMarkers(mapPoint){
 
   mapMarkers.push(marker);
   marker.setMap(map);
+
+  google.maps.event.addListener(marker, 'click', function() {
+    infoWindow.setContent(getInfoWindowContent(mapPoint.mapLocation(), mapPoint.mapNote()));
+    infoWindow.open(map, marker);
+  });
 
   // Got this from a couple articles I read, and then also the code in Project 2 
   bounds.extend(new google.maps.LatLng(mapPoint.mapLatitude(), mapPoint.mapLongitude()));
