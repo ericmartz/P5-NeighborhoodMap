@@ -3,10 +3,19 @@ var mapMarkers = [];
 var bounds = new google.maps.LatLngBounds();
 var infoWindow = new google.maps.InfoWindow();
 
-function getInfoWindowContent(header, content) {
+// So I figure storing a client ID and client secret in a JS file like this is probably a worst practice.
+// So in the spirit of security by obuscation (which is also a worst practice, I am prefixing these variables with NOT_MY to fool all those bad guys out there.
+// So yeah, I am just being silly, but there's got to be a better way to do this.
+var NOT_MY_CLIENT_ID = 'YE5DKRXUZGLVI5CJZI45W4GKF1BF0UL3C3IQMBRZISWKCQN0';
+var NOT_MY_CLIENT_SECRET = 'AKMFW32DAPSPQ5MX4YMHV2VKPCID3VLPWIUZADQ3BVENC3VH';
+
+function getInfoWindowContent(header, content, address) {
   var windowContent = '';
+
+  var imgURL = 'https://maps.googleapis.com/maps/api/streetview?size=300x150&location=' + address;
   windowContent += '<h3>' + header + '</h3>';
-  windowContent += '<p>' + content + '</p>'
+  windowContent += '<p>' + content + '</p>';
+  windowContent += '<img src="' + imgURL + '">'
   return windowContent;
 }
 
@@ -31,7 +40,7 @@ function addMapMarkers(mapPoint){
   marker.setMap(map);
 
   google.maps.event.addListener(marker, 'click', function() {
-    infoWindow.setContent(getInfoWindowContent(mapPoint.mapLocation(), mapPoint.mapNote()));
+    infoWindow.setContent(getInfoWindowContent(mapPoint.mapLocation(), mapPoint.mapNote(), mapPoint.mapLocationAddress()));
     infoWindow.open(map, marker);
   });
 
@@ -78,4 +87,27 @@ function stopMarkerAnimation(marker, timeout){
   setTimeout(function(){ 
     mapMarkers[marker].setAnimation(null); 
   }, timeout);
+}
+
+function getLocationInfo(location){
+  $locationInfo = $('#location-info');
+  $locationInfo.empty();
+  //$locationInfo.append(location.mapLocation());
+
+  // So building this URL slowly.  Don't really like it and will see about building it in an AJAX request instead
+  var foursquareURL = 'https://api.foursquare.com/v2/venues/search';
+  foursquareURL +='?client_id=' + NOT_MY_CLIENT_ID + '&client_secret=' + NOT_MY_CLIENT_SECRET + '&v=20130815&limit=1';
+  foursquareURL += '&ll=' + location.mapLatitude() + ',' + location.mapLongitude();
+  foursquareURL += '&query=' + location.mapLocation();
+  
+  console.log(foursquareURL);
+  
+  $.getJSON(foursquareURL, function( data ) {
+    var locInfo = data.response.venues[0];
+    //console.log(data.response.venues);
+    //console.log(locInfo);
+    $locationInfo.append('From Foursquare:<br>');
+    $locationInfo.append('<a href="' + locInfo.url + '">' + locInfo.name + '</a><br>');
+    $locationInfo.append('Who is here? ' + locInfo.hereNow.summary + '<br>');
+  });
 }

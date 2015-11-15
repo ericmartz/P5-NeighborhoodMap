@@ -7,7 +7,7 @@ var mapPoints = [
     type: 'restaurant',
     latitude: 33.78597,
     longitude: -84.41202,
-    note: 'This tavern has a great food, but also takes up two levels and has a great atmosphere. Plenty of games to play, including a bocce ball court.'
+    note: 'This tavern has a great food, but also takes up two levels and has a great atmosphere. Plenty of games to play, including a bocce ball court. You\'ll notice in the picture there is just a wall with windows. An interesting thing about Ormsby\'s is that there is no sign or identification from the street. It is in the basement of a shopping center, and the sign at the door cannot be seen until you are right in front of Ormsby\'s.' 
   },
   {
     location: 'Tap',
@@ -152,8 +152,9 @@ var ViewModel = function() {
     }
   });
 
-  self.markerAnimation = function(marker){
-    animateMarker(marker.mapLocation());
+  self.clickedLocation = function(location){
+    animateMarker(location.mapLocation());
+    getLocationInfo(location);
   };
 }
 

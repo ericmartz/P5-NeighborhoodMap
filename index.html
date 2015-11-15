@@ -4,18 +4,23 @@
 <title>Udacity's 5th Project | A Neighborhood Map</title>
 
 <link rel="stylesheet" href="css/main.css">
+<script src="js-frameworks/jquery-1.11.3.min.js"></script>
 <script src="js-frameworks/knockout.js"></script>
 
 </head>
 
 <body>
   <div id="list-view">
-    <h1>Places in Atlanta</h1>
-    <input id="s-input" class="controls" type="search" data-bind="textInput: query, valueUpdate: 'keyup'"></input>
-    <ul data-bind="foreach: search">
-      <li data-bind="text: mapLocation, click: $parent.markerAnimation">
-      </li>
-    </ul>
+    <section id="place-listing">
+      <h1>Places in Atlanta</h1>
+      <input id="s-input" class="controls" type="search" data-bind="textInput: query, valueUpdate: 'keyup'"></input>
+      <ul data-bind="foreach: search">
+        <li data-bind="text: mapLocation, click: $parent.clickedLocation, $parent.getInfo">
+        </li>
+      </ul>
+    </section>
+    <section id="location-info">
+    </section>
   </div>
   <div id="map"></div>
 
