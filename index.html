@@ -15,12 +15,12 @@
       <h1>Places in Atlanta</h1>
       <input id="s-input" class="controls" type="search" data-bind="textInput: query, valueUpdate: 'keyup'"></input>
       <ul data-bind="foreach: search">
-        <li data-bind="text: mapLocation, click: $parent.clickedLocation, $parent.getInfo">
-        </li>
+        <li data-bind="text: mapLocation, click: $parent.clickedLocation, $parent.getInfo"></li>
       </ul>
     </section>
     <section id="location-info">
-      <ul data-bind="foreach: chosenLocation">
+      <h4>Info:</h4>
+      <ul>
         <li data-bind="text: url"></li>
       </ul>
     </section>

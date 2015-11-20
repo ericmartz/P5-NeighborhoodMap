@@ -99,6 +99,10 @@ var MapPoint = function(data) {
   this.mapNote = ko.observable(data.note);
 }
 
+var LocationInfo = function() {
+  this.url = ko.observable();
+}
+
 var ViewModel = function() {
   var self = this;
 
@@ -106,8 +110,10 @@ var ViewModel = function() {
   self.mapPointsList = ko.observableArray([]);
 
   // KO Observable Array to hold information for chosen location
-  self.chosenLocation = ko.observableArray([]);
-    self.chosenLocation().url = ko.observable();
+  //self.chosenLocation = ko.observableArray([]);
+  //self.chosenLocation.push(new LocationInfo());
+
+  self.url = ko.observable();
 
   mapPoints.forEach(function(mapPoint){
     self.mapPointsList.push(new MapPoint(mapPoint));
@@ -160,8 +166,7 @@ var ViewModel = function() {
   self.clickedLocation = function(location){
     animateMarker(location.mapLocation());
     getLocationInfo(location).done(function(response){
-      console.log(response.response.venues[0].url);
-      self.chosenLocation().url(response.response.venues[0].url);
+      self.url(response.response.venues[0].url);
     });
   };
 }
