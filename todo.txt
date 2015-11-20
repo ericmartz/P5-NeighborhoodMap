@@ -1,0 +1,8 @@
+- Update JSON request.  It should return the information needed, and then I should update
+  the view from KO.
+
+- Change how markers work.  They should probably become part of the KO OA.
+
+  - Probably involve a lot of re-wiring.  map.js will probably become a helper file.
+
+- Need to change how the infoWindows gets its info for display.  This should be part of the KO View. 
