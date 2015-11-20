@@ -90,9 +90,6 @@ function stopMarkerAnimation(marker, timeout){
 }
 
 function getLocationInfo(location){
-  $locationInfo = $('#location-info');
-  $locationInfo.empty();
-  //$locationInfo.append(location.mapLocation());
 
   // So building this URL slowly.  Don't really like it and will see about building it in an AJAX request instead
   var foursquareURL = 'https://api.foursquare.com/v2/venues/search';
@@ -100,14 +97,11 @@ function getLocationInfo(location){
   foursquareURL += '&ll=' + location.mapLatitude() + ',' + location.mapLongitude();
   foursquareURL += '&query=' + location.mapLocation();
   
-  console.log(foursquareURL);
-  
-  $.getJSON(foursquareURL, function( data ) {
-    var locInfo = data.response.venues[0];
-    //console.log(data.response.venues);
-    //console.log(locInfo);
-    $locationInfo.append('From Foursquare:<br>');
-    $locationInfo.append('<a href="' + locInfo.url + '">' + locInfo.name + '</a><br>');
-    $locationInfo.append('Who is here? ' + locInfo.hereNow.summary + '<br>');
+  // console.log(foursquareURL);
+
+  return $.getJSON(foursquareURL, function(data) {
+    // Started out thinking I would need to add some sort of assignment variable, but after testing I don't.  
+    // Just have to return the AJAX request.
+    // var response = data;
   });
 }

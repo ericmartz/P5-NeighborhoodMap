@@ -102,7 +102,12 @@ var MapPoint = function(data) {
 var ViewModel = function() {
   var self = this;
 
+  // KO Observable Array to hold MapPoints for search and displaying markers
   self.mapPointsList = ko.observableArray([]);
+
+  // KO Observable Array to hold information for chosen location
+  self.chosenLocation = ko.observableArray([]);
+    self.chosenLocation().url = ko.observable();
 
   mapPoints.forEach(function(mapPoint){
     self.mapPointsList.push(new MapPoint(mapPoint));
@@ -154,7 +159,10 @@ var ViewModel = function() {
 
   self.clickedLocation = function(location){
     animateMarker(location.mapLocation());
-    getLocationInfo(location);
+    getLocationInfo(location).done(function(response){
+      console.log(response.response.venues[0].url);
+      self.chosenLocation().url(response.response.venues[0].url);
+    });
   };
 }
 

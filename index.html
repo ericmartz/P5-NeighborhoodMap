@@ -20,6 +20,9 @@
       </ul>
     </section>
     <section id="location-info">
+      <ul data-bind="foreach: chosenLocation">
+        <li data-bind="text: url"></li>
+      </ul>
     </section>
   </div>
   <div id="map"></div>
