@@ -59,13 +59,7 @@ function toggleMarkersInvisible(){
 }
 
 function toggleMarkerVisible(marker){
-  // console.log("ADDRESS:" + marker);
-  for(var i=0; i < mapMarkers.length; i++){
-    // console.log("MARKER:" + mapMarkers[i].title);
-    if(marker === mapMarkers[i].title){
-      mapMarkers[i].setVisible(true);
-    }
-  }
+  marker.setVisible(true);
 }
 
 // // I am using a loop here, but I feel like there has to be a way to do this that costs less in terms

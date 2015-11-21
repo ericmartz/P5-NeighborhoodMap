@@ -156,7 +156,7 @@ var ViewModel = function() {
   // Don't feel like i have the time to dive into this now, but it's worth keeping in mind.
   self.markerVisibility = ko.computed(function(){
     for(var i = 0; i < self.search().length; i++) {
-      toggleMarkerVisible(self.search()[i].mapLocation());
+      toggleMarkerVisible(self.search()[i].mapMarker());
     }
   });
 
