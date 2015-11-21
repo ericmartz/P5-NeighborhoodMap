@@ -48,6 +48,8 @@ function addMapMarkers(mapPoint){
   bounds.extend(new google.maps.LatLng(mapPoint.mapLatitude(), mapPoint.mapLongitude()));
   map.fitBounds(bounds);
   map.setCenter(bounds.getCenter());
+
+  return marker;
 }
 
 function toggleMarkersInvisible(){

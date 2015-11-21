@@ -1,5 +1,3 @@
-// added branch refactor-markers.  on it now.
-
 // So I would rather use the geocoding to have an address and find the latitude/longitude,
 // but I started out hardcoding the lat/long just because I thought it would be best to start simply.
 var mapPoints = [
@@ -99,6 +97,7 @@ var MapPoint = function(data) {
   this.mapLatitude = ko.observable(data.latitude);
   this.mapLongitude = ko.observable(data.longitude);
   this.mapNote = ko.observable(data.note);
+  this.mapMarker = ko.observable();
 }
 
 var LocationInfo = function() {
@@ -111,10 +110,6 @@ var ViewModel = function() {
   // KO Observable Array to hold MapPoints for search and displaying markers
   self.mapPointsList = ko.observableArray([]);
 
-  // KO Observable Array to hold information for chosen location
-  //self.chosenLocation = ko.observableArray([]);
-  //self.chosenLocation.push(new LocationInfo());
-
   self.url = ko.observable();
 
   mapPoints.forEach(function(mapPoint){
@@ -122,7 +117,7 @@ var ViewModel = function() {
   });
 
   for(var i = 0; i < self.mapPointsList().length; i++){
-    addMapMarkers(self.mapPointsList()[i]);
+    self.mapPointsList()[i].mapMarker(addMapMarkers(self.mapPointsList()[i]));
   }
 
   self.query = ko.observable('');
