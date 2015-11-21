@@ -1,3 +1,5 @@
+// added branch refactor-markers.  on it now.
+
 // So I would rather use the geocoding to have an address and find the latitude/longitude,
 // but I started out hardcoding the lat/long just because I thought it would be best to start simply.
 var mapPoints = [
