@@ -52,6 +52,9 @@ function addMapMarkers(mapPoint){
   return marker;
 }
 
+// TODO: all markers are set to visible and then markers in the search array are set back to visible.
+// TODO: maybe instead of having two functions to make markers invisible and then visible
+// TODO: I could instead have a toggleMarkers function that sets visible makers invisble and vice versa.
 function toggleMarkersInvisible(){
   for(var i=0; i < mapMarkers.length; i++){
     mapMarkers[i].setVisible(false);
