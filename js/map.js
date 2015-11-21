@@ -1,4 +1,5 @@
 var map;
+var mapMarkers = [];
 var bounds = new google.maps.LatLngBounds();
 var infoWindow = new google.maps.InfoWindow();
 
@@ -8,6 +9,9 @@ var infoWindow = new google.maps.InfoWindow();
 var NOT_MY_CLIENT_ID = 'YE5DKRXUZGLVI5CJZI45W4GKF1BF0UL3C3IQMBRZISWKCQN0';
 var NOT_MY_CLIENT_SECRET = 'AKMFW32DAPSPQ5MX4YMHV2VKPCID3VLPWIUZADQ3BVENC3VH';
 
+// Not sure what I am doing here is entirely in line with the project.  I am 
+// updating the view manually instead of using Knockout. So...
+// TODO: Update the infoWindow from the ViewModel
 function getInfoWindowContent(header, content, address) {
   var windowContent = '';
 
@@ -22,8 +26,8 @@ function initMap() {
   // Create a map object and specify the DOM element for display.
   map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 33.74900, lng: -84.38798},
-    scrollwheel: false
-    //zoom: 12
+    scrollwheel: false  // Why? Because I hate when I am scrolling a site and suddenly grab the map 
+                        // it starts to zoom in or out.  
   });
 }
 
@@ -35,8 +39,14 @@ function addMapMarkers(mapPoint){
     title: mapPoint.mapLocation()
   });
 
+  // mapMarkers used to be used in several functions, but code has been refactored 
+  // so mapMarkers are only used to toggle the markers invisible.
+  // TODO: refactor toggling markers invisible so that I can get rid of the mapMarkers array
+  mapMarkers.push(marker);
   marker.setMap(map);
 
+  // TODO: Not sure this is best.  I might be able to create the infoWindow and add the addListener
+  // TODO: from the ViewModel.  We'll see.  
   google.maps.event.addListener(marker, 'click', function() {
     infoWindow.setContent(getInfoWindowContent(mapPoint.mapLocation(), mapPoint.mapNote(), mapPoint.mapLocationAddress()));
     infoWindow.open(map, marker);
