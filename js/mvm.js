@@ -161,7 +161,7 @@ var ViewModel = function() {
   });
 
   self.clickedLocation = function(location){
-    animateMarker(location.mapLocation());
+    animateMarker(location.mapMarker());
     getLocationInfo(location).done(function(response){
       self.url(response.response.venues[0].url);
     });

@@ -1,5 +1,4 @@
 var map;
-var mapMarkers = [];
 var bounds = new google.maps.LatLngBounds();
 var infoWindow = new google.maps.InfoWindow();
 
@@ -36,7 +35,6 @@ function addMapMarkers(mapPoint){
     title: mapPoint.mapLocation()
   });
 
-  mapMarkers.push(marker);
   marker.setMap(map);
 
   google.maps.event.addListener(marker, 'click', function() {
@@ -65,26 +63,16 @@ function toggleMarkerVisible(marker){
   marker.setVisible(true);
 }
 
-// // I am using a loop here, but I feel like there has to be a way to do this that costs less in terms
-// // of computer resources.
-// // TODO: Find out a way to do this without a loop.
 function animateMarker(marker){
-  for(var i=0; i < mapMarkers.length; i++){
-    if(marker === mapMarkers[i].title){
-      mapMarkers[i].setAnimation(google.maps.Animation.BOUNCE);
-      // Tried to stop the animation in the loop, but didn't work
-      // My guess is that the loop is exited before the timeout occurs, so the timeout doesn't know which marker
-      // to stop animating anymore.
-      stopMarkerAnimation(i, 1400);
-    }
-  }
+  marker.setAnimation(google.maps.Animation.BOUNCE);
+  stopMarkerAnimation(marker, 1400);
 }
 
 // // For this function, got some help at the google maps API and here:
 // // http://stackoverflow.com/questions/7339200/bounce-a-pin-in-google-maps-once
 function stopMarkerAnimation(marker, timeout){
   setTimeout(function(){ 
-    mapMarkers[marker].setAnimation(null); 
+    marker.setAnimation(null); 
   }, timeout);
 }
 
