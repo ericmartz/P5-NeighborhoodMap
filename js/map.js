@@ -118,3 +118,7 @@ function getFoursquareDetail(id) {
 
   return $.getJSON(foursquareURL, function(data){});
 }
+
+function getFlickrPics(){
+  
+}
