@@ -109,6 +109,11 @@ var ViewModel = function() {
   // url is an observable that allows me to display the url received from Foursuare
   self.rating = ko.observable();
   self.url = ko.observable();
+  self.menu_url = ko.observable();
+  self.phone_num = ko.observable();
+  self.address = ko.observable();
+  self.costEstimate = ko.observable();
+
 
   // Filling in the mapPointsList with data
   mapPoints.forEach(function(mapPoint){
@@ -158,8 +163,12 @@ var ViewModel = function() {
     // First I have to perform an ajax request to figure out what the venue ID is and get some basic info.
     getFoursquareInfo(location).done(function(response){
       self.url(response.response.venues[0].url);
+      self.menu_url(response.response.venues[0].menu.url);
+      self.menu_url(response.response.venues[0].contact.formattedPhone);
+      self.address(response.response.venues[0].location.formattedAddress);
       //Then I use the venue ID to get detailed info concerning the venue.  Mostly, I just wanted the rating.
       getFoursquareDetail(response.response.venues[0].id).done(function(response){
+        self.costEstimate(response.response.venue.price.message);
         self.rating(response.response.venue.rating);
       });
     });
