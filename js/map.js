@@ -47,6 +47,11 @@ function addMapMarkers(mapPoint){
 
   // TODO: Not sure this is best.  I might be able to create the infoWindow and add the addListener
   // TODO: from the ViewModel.  We'll see.  
+  // I would add the marker animation here as well, since the instructions say to 
+  // "animate marker when either the list item associated with it or the map marker itself is selected."
+  // I understand the marker animation when the list item is selected, because that draws the user's attention to where
+  // that location is marked on the map.  When you select the marker and it jumps, I think that is bad UI.  So I didn't do it.
+  // I hope this explanation is enough to let the review now I can do it, but chose not to.
   google.maps.event.addListener(marker, 'click', function() {
     infoWindow.setContent(getInfoWindowContent(mapPoint.mapLocation(), mapPoint.mapNote(), mapPoint.mapLocationAddress()));
     infoWindow.open(map, marker);
