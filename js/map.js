@@ -86,6 +86,10 @@ function stopMarkerAnimation(marker, timeout){
   }, timeout);
 }
 
+// Not sure why I did this here.  Since the file is map.js.  I think I am going to end up renaming
+// this file helper.js and it can just be helper functions.
+// Or maybe move this to another file called ajax.js or requests.js and move this function there.
+// TODO: figure out the above comment. 
 function getLocationInfo(location){
 
   // So building this URL slowly.  Don't really like it and will see about building it in an AJAX request instead

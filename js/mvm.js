@@ -86,9 +86,9 @@ var mapPoints = [
 // I was a little unsure on this, but I see the individual MapPoints as my model.  
 // Below, in the ViewModel I create a mapPointsList, which is an observableArray.
 // I see the mapPointsList as an easy way to iterate through and keep track of the individual MapPoints.  
-// So I consider the mapPointsList hould be part of the ViewModel.  I saw a post somewhere that 
+// So I think the mapPointsList should be part of the ViewModel.  I saw a post somewhere where 
 // someone claimed it should be part of the model, but it did not make sense to me.  
-// Anyway, thought I would leave my reasoning here for the reviewr to see how I reasoned this out.
+// Anyway, thought I would leave my reasoning here for the reviewer to see how I reasoned this out.
 var MapPoint = function(data) {
   this.mapLocation = ko.observable(data.location);
   this.mapLocationAddress = ko.observable(data.address);
@@ -100,26 +100,26 @@ var MapPoint = function(data) {
   this.mapMarker = ko.observable();
 }
 
-var LocationInfo = function() {
-  this.url = ko.observable();
-}
-
 var ViewModel = function() {
   var self = this;
 
   // KO Observable Array to hold MapPoints for search and displaying markers
   self.mapPointsList = ko.observableArray([]);
 
+  // url is an observable that allows me to display the url received from Foursuare
   self.url = ko.observable();
 
+  // Filling in the mapPointsList with data
   mapPoints.forEach(function(mapPoint){
     self.mapPointsList.push(new MapPoint(mapPoint));
   });
 
+  // Adding markers to the map.  I am returning the marker to the mapPointsList so it can be used in the ViewModel
   for(var i = 0; i < self.mapPointsList().length; i++){
     self.mapPointsList()[i].mapMarker(addMapMarkers(self.mapPointsList()[i]));
   }
 
+  // query holds the value of the filter text field
   self.query = ko.observable('');
 
   // Utilized the following to help with this.  
@@ -141,25 +141,17 @@ var ViewModel = function() {
     });
   });
 
-  // So here's my understanding of how this works.
-  // I created toggleMarkersInvisible() so that when a search is performed, all markers are set to invisible.
-  // Then, the markerVisibility computed is listening to the search() computed.  Every time search changes the computed runs
-  // and looks through the search computed to see what is in it, and sends off the address of each item to 
-  // toggleMarkerVisible.
-  // Since everytime a button is pressed in search, the search computed changes and sets everything to invisible, and then
-  // markerVisibility sees a change and runs and sets the appropriate mapPoints back to visible.  Makes it look like it is adding
-  // back the markers as you delete letters, but really everything is constantly set to invisible and then re-added
-  // Pretty stoked that I wrote this after just looking at how to set map markers to invisible 
-  // and then looked at the KO documentation on computeds.
-  // Although I do wonder what this is doing to memory.  With this small application, it won't cause any problems,
-  // But it is looping through these arrays with every keypress.  
-  // Don't feel like i have the time to dive into this now, but it's worth keeping in mind.
+  // Marker visibility is a computed function that listens to the search observable array and adds markers back
+  // to the map as the location is added to the search observable array.
   self.markerVisibility = ko.computed(function(){
     for(var i = 0; i < self.search().length; i++) {
+      // I could set the marker to visible here, but I thought I would pass that off on another function
+      // Could be re-usable.  
       toggleMarkerVisible(self.search()[i].mapMarker());
     }
   });
 
+  // clickedLocation is used to control what actions are taken when the user clicks on one of the locations.
   self.clickedLocation = function(location){
     animateMarker(location.mapMarker());
     getLocationInfo(location).done(function(response){
