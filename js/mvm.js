@@ -146,7 +146,7 @@ var ViewModel = function() {
   // to the map as the location is added to the search observable array.
   self.markerVisibility = ko.computed(function(){
     for(var i = 0; i < self.search().length; i++) {
-      // I could set the marker to visible here, but I thought I would pass that off on another function
+      // I could set the marker to visible here, but I thought I would pass that off to another function
       // Could be re-usable.  
       toggleMarkerVisible(self.search()[i].mapMarker());
     }
