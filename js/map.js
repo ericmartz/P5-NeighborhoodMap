@@ -103,11 +103,18 @@ function getFoursquareInfo(location){
   foursquareURL += '&ll=' + location.mapLatitude() + ',' + location.mapLongitude();
   foursquareURL += '&query=' + location.mapLocation();
   
-  // console.log(foursquareURL);
+  //console.log(foursquareURL);
 
-  return $.getJSON(foursquareURL, function(data) {
-    // Started out thinking I would need to add some sort of assignment variable, but after testing I don't.  
-    // Just have to return the AJAX request.
-    // var response = data;
-  });
+  return $.getJSON(foursquareURL, function(data){});
+}
+
+// Once I get the compact info object, I use that to get the detail information.
+function getFoursquareDetail(id) {
+  // https://api.foursquare.com/v2/venues/40a55d80f964a52020f31ee3?oauth_token=O5HKB0RCBKUUNLPOBP0LPAWZVCCCYREEABNWG42PIKLGYM3U&v=20151122
+  var foursquareURL = 'https://api.foursquare.com/v2/venues/' + id;
+  foursquareURL +='?client_id=' + NOT_MY_CLIENT_ID + '&client_secret=' + NOT_MY_CLIENT_SECRET + '&v=20130815&limit=1';
+
+  //console.log(foursquareURL)
+
+  return $.getJSON(foursquareURL, function(data){});
 }

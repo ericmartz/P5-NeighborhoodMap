@@ -107,6 +107,7 @@ var ViewModel = function() {
   self.mapPointsList = ko.observableArray([]);
 
   // url is an observable that allows me to display the url received from Foursuare
+  self.rating = ko.observable();
   self.url = ko.observable();
 
   // Filling in the mapPointsList with data
@@ -154,8 +155,13 @@ var ViewModel = function() {
   // clickedLocation is used to control what actions are taken when the user clicks on one of the locations.
   self.clickedLocation = function(location){
     animateMarker(location.mapMarker());
+    // First I have to perform an ajax request to figure out what the venue ID is and get some basic info.
     getFoursquareInfo(location).done(function(response){
       self.url(response.response.venues[0].url);
+      //Then I use the venue ID to get detailed info concerning the venue.  Mostly, I just wanted the rating.
+      getFoursquareDetail(response.response.venues[0].id).done(function(response){
+        self.rating(response.response.venue.rating);
+      });
     });
   };
 }
