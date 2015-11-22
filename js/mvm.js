@@ -71,7 +71,7 @@ var mapPoints = [
     type: 'site',
     latitude: 33.77262,
     longitude: -84.38556,
-    note: 'If there is anything that say \'Atlanta\' then this is it. A wildly cool theater with an Egyptian ballroom and starry sky ceiling. Has a great history and fun place to tour.'
+    note: 'If there is anything that says \'Atlanta\' then this is it. A wildly cool theater with an Egyptian ballroom and starry sky ceiling. Has a great history and fun place to tour.'
   },
   {
     location: 'High Museum of Art',
@@ -154,7 +154,7 @@ var ViewModel = function() {
   // clickedLocation is used to control what actions are taken when the user clicks on one of the locations.
   self.clickedLocation = function(location){
     animateMarker(location.mapMarker());
-    getLocationInfo(location).done(function(response){
+    getFoursquareInfo(location).done(function(response){
       self.url(response.response.venues[0].url);
     });
   };
