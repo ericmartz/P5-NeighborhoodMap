@@ -164,7 +164,7 @@ var ViewModel = function() {
     getFoursquareInfo(location).done(function(response){
       self.url(response.response.venues[0].url);
       self.menu_url(response.response.venues[0].menu.url);
-      self.menu_url(response.response.venues[0].contact.formattedPhone);
+      self.phone_num(response.response.venues[0].contact.formattedPhone);
       self.address(response.response.venues[0].location.formattedAddress);
       //Then I use the venue ID to get detailed info concerning the venue.  Mostly, I just wanted the rating.
       getFoursquareDetail(response.response.venues[0].id).done(function(response){
