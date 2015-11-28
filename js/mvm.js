@@ -162,14 +162,15 @@ var ViewModel = function() {
     animateMarker(location.mapMarker());
     // First I have to perform an ajax request to figure out what the venue ID is and get some basic info.
     getFoursquareInfo(location).done(function(response){
-      self.url(response.response.venues[0].url);
-      self.menu_url(response.response.venues[0].menu.url);
-      self.phone_num(response.response.venues[0].contact.formattedPhone);
+      self.url(response.response.venues[0].url || 'This location does not have a website');
+      self.menu_url(response.response.venues[0].menu ? response.response.venues[0].menu.url : 'This location does not have a menu' );
+      self.phone_num(response.response.venues[0].contact.formattedPhone || 'This location does not have a phone');
       self.address(response.response.venues[0].location.formattedAddress);
+
       //Then I use the venue ID to get detailed info concerning the venue.  Mostly, I just wanted the rating.
       getFoursquareDetail(response.response.venues[0].id).done(function(response){
-        self.costEstimate(response.response.venue.price.message);
-        self.rating(response.response.venue.rating);
+        self.costEstimate(response.response.venue.price ? response.response.venue.price.message : 'This location does not have a price estimate');
+        self.rating(response.response.venue.rating || 'This location does not have a rating');
       });
     });
   };
