@@ -113,6 +113,7 @@ var ViewModel = function() {
   self.phone_num = ko.observable();
   self.address = ko.observable();
   self.costEstimate = ko.observable();
+  self.locationName = ko.observable();
 
 
   // Filling in the mapPointsList with data
@@ -162,6 +163,7 @@ var ViewModel = function() {
     animateMarker(location.mapMarker());
     // First I have to perform an ajax request to figure out what the venue ID is and get some basic info.
     getFoursquareInfo(location).done(function(response){
+      self.locationName(response.response.venues[0].name);
       self.url(response.response.venues[0].url || 'This location does not have a website');
       self.menu_url(response.response.venues[0].menu ? response.response.venues[0].menu.url : 'This location does not have a menu' );
       self.phone_num(response.response.venues[0].contact.formattedPhone || 'This location does not have a phone');

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+f<!DOCTYPE html>
 <html>
 <head>
 <title>Udacity's 5th Project | A Neighborhood Map</title>
@@ -19,12 +19,11 @@
       </ul>
     </section>
     <section id="location-info">
-      <h4>Info from Foursquare</h4>
+      <h4>Info from Foursquare for <a data-bind="text: locationName, attr: { href: url }" target="blank"></a></h4>
       <ul>
         <li>Rating: <span data-bind="text: rating"></span></li>
         <li>Cost: <span data-bind="text: costEstimate"></span></li>
-        <li><a data-bind="attr: { href: url }" target="blank">Website</a></li>
-        <li>Menu: <span data-bind="text: menu_url"></span></li>
+        <li><a data-bind="attr: { href: menu_url }" target="blank">Menu</a></li>
         <li>Phone Number: <span data-bind="text: phone_num"></span></li>
         <li>Address: <span data-bind="text: address"></span></li>
       </ul>
@@ -37,6 +36,7 @@
       </script>
 
 
+  <script src="js-frameworks/oauth-signature.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDO11YUjfobraQtsvn9WNyXjQs3hkPGugE"></script>
   <script src="js/map.js"></script>
   <script type="text/javascript">initMap();</script>
