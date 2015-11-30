@@ -105,6 +105,7 @@ var ViewModel = function() {
 
   // KO Observable Array to hold MapPoints for search and displaying markers
   self.mapPointsList = ko.observableArray([]);
+  self.flickrPhotos = ko.observableArray([]);
 
   // url is an observable that allows me to display the url received from Foursuare
   self.rating = ko.observable();
@@ -174,6 +175,24 @@ var ViewModel = function() {
         self.costEstimate(response.response.venue.price ? response.response.venue.price.message : 'This location does not have a price estimate');
         self.rating(response.response.venue.rating || 'This location does not have a rating');
       });
+    });
+
+    getFlickrInfo(location).done(function(response){
+      // console.log(response.photos.photo);
+      var photoArray = response.photos.photo;
+      // console.log(response);
+      var photo;
+      self.flickrPhotos.removeAll();
+      for(var i=0; i < photoArray.length; i++){
+        getFlickrPhotoURL(photoArray[i].id).done(function(response){
+          photo = {
+            photoURL : response.sizes.size[4].source
+          }
+          // console.log(photo);
+          self.flickrPhotos.push(photo);
+        });
+      }
+      // console.log(self.flickrPhotos()); 
     });
   };
 }

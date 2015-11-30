@@ -28,6 +28,11 @@ f<!DOCTYPE html>
         <li>Address: <span data-bind="text: address"></span></li>
       </ul>
     </section>
+    <section id="flickr-photos">
+      <ul data-bind="foreach: flickrPhotos">
+        <li><img data-bind="attr: { src: photoURL}"></li>
+      </ul>
+    </section>
   </div>
   <div id="map"></div>
 
@@ -36,7 +41,7 @@ f<!DOCTYPE html>
       </script>
 
 
-  <script src="js-frameworks/oauth-signature.js"></script>
+  <!-- <script src="js-frameworks/oauth-signature.js"></script> -->
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDO11YUjfobraQtsvn9WNyXjQs3hkPGugE"></script>
   <script src="js/map.js"></script>
   <script type="text/javascript">initMap();</script>

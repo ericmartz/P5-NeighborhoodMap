@@ -8,6 +8,7 @@ var infoWindow = new google.maps.InfoWindow();
 // So yeah, I am just being silly, but there's got to be a better way to do this.
 var NOT_MY_CLIENT_ID = 'YE5DKRXUZGLVI5CJZI45W4GKF1BF0UL3C3IQMBRZISWKCQN0';
 var NOT_MY_CLIENT_SECRET = 'AKMFW32DAPSPQ5MX4YMHV2VKPCID3VLPWIUZADQ3BVENC3VH';
+var NOT_MY_FLICKR_API = 'c2324d1f98f8a7729e48a3261c1c4f27'
 
 // Not sure what I am doing here is entirely in line with the project.  I am 
 // updating the view manually instead of using Knockout. So...
@@ -110,11 +111,40 @@ function getFoursquareInfo(location){
 
 // Once I get the compact info object, I use that to get the detail information.
 function getFoursquareDetail(id) {
-  // https://api.foursquare.com/v2/venues/40a55d80f964a52020f31ee3?oauth_token=O5HKB0RCBKUUNLPOBP0LPAWZVCCCYREEABNWG42PIKLGYM3U&v=20151122
+
   var foursquareURL = 'https://api.foursquare.com/v2/venues/' + id;
   foursquareURL +='?client_id=' + NOT_MY_CLIENT_ID + '&client_secret=' + NOT_MY_CLIENT_SECRET + '&v=20130815&limit=1';
 
   //console.log(foursquareURL)
 
   return $.getJSON(foursquareURL, function(data){});
+}
+
+
+function getFlickrInfo(location) {
+  
+  // Really thought I was going to have to use oauth for the flickr API, but I guess I was wrong?  
+  // Looking at the documentation, I think since I am only requesting public data, no need for authentication, so no need for oauth
+  // https://www.flickr.com/services/api/flickr.photos.search.html
+
+  var place = location.mapLocation();
+
+  if(location.mapLocation() === 'Ormsby\'s Tavern') {
+    place = 'ormsby\'s'; 
+  }
+
+  var flickrURL = 'https://api.flickr.com/services/rest/?';
+  flickrURL +='method=flickr.photos.search&api_key=' + NOT_MY_FLICKR_API + '&text=' + place + ', atlanta&format=json&nojsoncallback=1&per_page=5';
+
+  console.log(flickrURL);
+  return $.getJSON(flickrURL, function(data){});
+}
+
+function getFlickrPhotoURL(photoID){
+  
+  var flickrPhotoURLs = 'https://api.flickr.com/services/rest/?';
+  flickrPhotoURLs +='method=flickr.photos.getSizes&api_key=' + NOT_MY_FLICKR_API + '&photo_id=' + photoID + '&format=json&nojsoncallback=1';
+
+  // console.log(flickrPhotoURLs);
+  return $.getJSON(flickrPhotoURLs, function(data){});
 }
