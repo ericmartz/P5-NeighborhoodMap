@@ -103,7 +103,7 @@ function getFoursquareInfo(location){
 
   // So building this URL slowly.  Don't really like it and will see about building it in an AJAX request instead
   var foursquareURL = FOURSQUARE_BASE_URL;
-  foursquareURL +='?client_id=' + NOT_MY_CLIENT_ID + '&client_secret=' + NOT_MY_CLIENT_SECRET + '&v=20130815&limit=1';
+  foursquareURL += 'search?client_id=' + NOT_MY_CLIENT_ID + '&client_secret=' + NOT_MY_CLIENT_SECRET + '&v=20130815&limit=1';
   foursquareURL += '&ll=' + location.mapLatitude() + ',' + location.mapLongitude();
   foursquareURL += '&query=' + location.mapLocation();
 
