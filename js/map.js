@@ -4,11 +4,14 @@ var bounds = new google.maps.LatLngBounds();
 var infoWindow = new google.maps.InfoWindow();
 
 // So I figure storing a client ID and client secret in a JS file like this is probably a worst practice.
-// So in the spirit of security by obuscation (which is also a worst practice, I am prefixing these variables with NOT_MY to fool all those bad guys out there.
+// So in the spirit of security by obfuscation (which is also a worst practice), I am prefixing these variables with NOT_MY to fool all those bad guys out there.
 // So yeah, I am just being silly, but there's got to be a better way to do this.
 var NOT_MY_CLIENT_ID = 'YE5DKRXUZGLVI5CJZI45W4GKF1BF0UL3C3IQMBRZISWKCQN0';
 var NOT_MY_CLIENT_SECRET = 'AKMFW32DAPSPQ5MX4YMHV2VKPCID3VLPWIUZADQ3BVENC3VH';
 var NOT_MY_FLICKR_API = 'c2324d1f98f8a7729e48a3261c1c4f27'
+
+var FOURSQUARE_BASE_URL = 'https://api.foursquare.com/v2/venues/';
+var FLICKR_BASE_URL = 'https://api.flickr.com/services/rest/?';
 
 // Not sure what I am doing here is entirely in line with the project.  I am 
 // updating the view manually instead of using Knockout. So...
@@ -84,8 +87,8 @@ function animateMarker(marker){
   stopMarkerAnimation(marker, 1400);
 }
 
-// // For this function, got some help at the google maps API and here:
-// // http://stackoverflow.com/questions/7339200/bounce-a-pin-in-google-maps-once
+// For this function, got some help at the google maps API and here:
+// http://stackoverflow.com/questions/7339200/bounce-a-pin-in-google-maps-once
 function stopMarkerAnimation(marker, timeout){
   setTimeout(function(){ 
     marker.setAnimation(null); 
@@ -99,12 +102,10 @@ function stopMarkerAnimation(marker, timeout){
 function getFoursquareInfo(location){
 
   // So building this URL slowly.  Don't really like it and will see about building it in an AJAX request instead
-  var foursquareURL = 'https://api.foursquare.com/v2/venues/search';
+  var foursquareURL = FOURSQUARE_BASE_URL;
   foursquareURL +='?client_id=' + NOT_MY_CLIENT_ID + '&client_secret=' + NOT_MY_CLIENT_SECRET + '&v=20130815&limit=1';
   foursquareURL += '&ll=' + location.mapLatitude() + ',' + location.mapLongitude();
   foursquareURL += '&query=' + location.mapLocation();
-  
-  //console.log(foursquareURL);
 
   return $.getJSON(foursquareURL, function(data){});
 }
@@ -112,10 +113,8 @@ function getFoursquareInfo(location){
 // Once I get the compact info object, I use that to get the detail information.
 function getFoursquareDetail(id) {
 
-  var foursquareURL = 'https://api.foursquare.com/v2/venues/' + id;
+  var foursquareURL = FOURSQUARE_BASE_URL + id;
   foursquareURL +='?client_id=' + NOT_MY_CLIENT_ID + '&client_secret=' + NOT_MY_CLIENT_SECRET + '&v=20130815&limit=1';
-
-  //console.log(foursquareURL)
 
   return $.getJSON(foursquareURL, function(data){});
 }
@@ -133,8 +132,7 @@ function getFlickrInfo(location) {
     place = 'ormsby\'s'; 
   }
 
-  var flickrURL = 'https://api.flickr.com/services/rest/?';
-  flickrURL +='method=flickr.photos.search&api_key=' + NOT_MY_FLICKR_API + '&text=' + place + ', atlanta&format=json&nojsoncallback=1&per_page=5';
+  var flickrURL = FLICKR_BASE_URL + 'method=flickr.photos.search&api_key=' + NOT_MY_FLICKR_API + '&text=' + place + ', atlanta&format=json&nojsoncallback=1&per_page=5';
 
   console.log(flickrURL);
   return $.getJSON(flickrURL, function(data){});
@@ -142,9 +140,7 @@ function getFlickrInfo(location) {
 
 function getFlickrPhotoURL(photoID){
   
-  var flickrPhotoURLs = 'https://api.flickr.com/services/rest/?';
-  flickrPhotoURLs +='method=flickr.photos.getSizes&api_key=' + NOT_MY_FLICKR_API + '&photo_id=' + photoID + '&format=json&nojsoncallback=1';
+  var flickrPhotoURLs = FLICKR_BASE_URL + 'method=flickr.photos.getSizes&api_key=' + NOT_MY_FLICKR_API + '&photo_id=' + photoID + '&format=json&nojsoncallback=1';
 
-  // console.log(flickrPhotoURLs);
   return $.getJSON(flickrPhotoURLs, function(data){});
 }

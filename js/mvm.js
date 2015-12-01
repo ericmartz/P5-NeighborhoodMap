@@ -105,9 +105,12 @@ var ViewModel = function() {
 
   // KO Observable Array to hold MapPoints for search and displaying markers
   self.mapPointsList = ko.observableArray([]);
+
+  // flickrPhotos is an observable array that updates the photos obtained from Flickr
   self.flickrPhotos = ko.observableArray([]);
 
-  // url is an observable that allows me to display the url received from Foursuare
+  // The following variables are used to update the view when a location is clicked.
+  // Each observable holds data to display that is received from Foursquare
   self.rating = ko.observable();
   self.url = ko.observable();
   self.menu_url = ko.observable();
@@ -161,8 +164,9 @@ var ViewModel = function() {
 
   // clickedLocation is used to control what actions are taken when the user clicks on one of the locations.
   self.clickedLocation = function(location){
+    // First I animate the marker to draw attention to it once clicked.
     animateMarker(location.mapMarker());
-    // First I have to perform an ajax request to figure out what the venue ID is and get some basic info.
+    // Second I have to perform an ajax request to figure out what the venue ID is and get some basic info.
     getFoursquareInfo(location).done(function(response){
       self.locationName(response.response.venues[0].name);
       self.url(response.response.venues[0].url || 'This location does not have a website');
@@ -177,22 +181,24 @@ var ViewModel = function() {
       });
     });
 
+    // Finally I send off a request to get a list of pictures from Flickr
     getFlickrInfo(location).done(function(response){
-      // console.log(response.photos.photo);
       var photoArray = response.photos.photo;
-      // console.log(response);
       var photo;
+
+      // Then I remove any photos already displayed on the page
       self.flickrPhotos.removeAll();
+
+      // Then I use the picture info obtained in the previous request to get specific info on the 
+      // pictures.  Then I use that specific info to build an array of pictures.  
       for(var i=0; i < photoArray.length; i++){
         getFlickrPhotoURL(photoArray[i].id).done(function(response){
           photo = {
             photoURL : response.sizes.size[4].source
           }
-          // console.log(photo);
           self.flickrPhotos.push(photo);
         });
       }
-      // console.log(self.flickrPhotos()); 
     });
   };
 }
