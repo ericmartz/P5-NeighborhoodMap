@@ -119,7 +119,6 @@ function getFoursquareDetail(id) {
   return $.getJSON(foursquareURL, function(data){});
 }
 
-
 function getFlickrInfo(location) {
   
   // Really thought I was going to have to use oauth for the flickr API, but I guess I was wrong?  
