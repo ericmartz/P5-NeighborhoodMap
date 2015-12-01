@@ -115,7 +115,7 @@ function getFoursquareDetail(id) {
 
   var foursquareURL = FOURSQUARE_BASE_URL + id;
   foursquareURL +='?client_id=' + NOT_MY_CLIENT_ID + '&client_secret=' + NOT_MY_CLIENT_SECRET + '&v=20130815&limit=1';
-
+  
   return $.getJSON(foursquareURL, function(data){});
 }
 
