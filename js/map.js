@@ -13,10 +13,16 @@ var NOT_MY_FLICKR_API = 'c2324d1f98f8a7729e48a3261c1c4f27'
 var FOURSQUARE_BASE_URL = 'https://api.foursquare.com/v2/venues/';
 var FLICKR_BASE_URL = 'https://api.flickr.com/services/rest/?';
 
-// Not sure what I am doing here is entirely in line with the project.  I am 
-// updating the view manually instead of using Knockout. So...
-// TODO: Update the infoWindow from the ViewModel
-function getInfoWindowContent(header, content, address) {
+// Not sure what I am doing here is entirely in line with the project.
+// I am setting the content for each infoWindow manually.  
+// However, the view is still being updated by Google Map API?
+// What I mean is that I am not messing with the dom, so to speak.
+// Although the code below has tags in it, I don't think I am truy interacting with the DOM in the function below.
+// So...
+// POSSIBLE TODO: Figure out how to update the infoWindow from KO.
+// Although, each marker has its own infoWindow, maybe this is best.  
+// I am leaving as is for now, but maybe will come back to it.
+function setInfoWindowContent(header, content, address) {
   var windowContent = '';
 
   var imgURL = 'https://maps.googleapis.com/maps/api/streetview?size=300x150&location=' + address;
@@ -24,6 +30,13 @@ function getInfoWindowContent(header, content, address) {
   windowContent += '<p>' + content + '</p>';
   windowContent += '<img src="' + imgURL + '">'
   return windowContent;
+}
+
+function createInfoWindow(mapPoint) {
+  google.maps.event.addListener(mapPoint.mapMarker(), 'click', function() {
+    infoWindow.setContent(setInfoWindowContent(mapPoint.mapLocation(), mapPoint.mapNote(), mapPoint.mapLocationAddress()));
+    infoWindow.open(map, mapPoint.mapMarker());
+  });
 }
 
 function initMap() {
@@ -48,18 +61,6 @@ function addMapMarkers(mapPoint){
   // TODO: refactor toggling markers invisible so that I can get rid of the mapMarkers array
   mapMarkers.push(marker);
   marker.setMap(map);
-
-  // TODO: Not sure this is best.  I might be able to create the infoWindow and add the addListener
-  // TODO: from the ViewModel.  We'll see.  
-  // I would add the marker animation here as well, since the instructions say to 
-  // "animate marker when either the list item associated with it or the map marker itself is selected."
-  // I understand the marker animation when the list item is selected, because that draws the user's attention to where
-  // that location is marked on the map.  When you select the marker and it jumps, I think that is bad UI.  So I didn't do it.
-  // I hope this explanation is enough to let the review now I can do it, but chose not to.
-  google.maps.event.addListener(marker, 'click', function() {
-    infoWindow.setContent(getInfoWindowContent(mapPoint.mapLocation(), mapPoint.mapNote(), mapPoint.mapLocationAddress()));
-    infoWindow.open(map, marker);
-  });
 
   // Got this from a couple articles I read, and then also the code in Project 2 
   bounds.extend(new google.maps.LatLng(mapPoint.mapLatitude(), mapPoint.mapLongitude()));

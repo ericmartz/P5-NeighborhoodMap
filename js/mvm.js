@@ -130,6 +130,10 @@ var ViewModel = function() {
     self.mapPointsList()[i].mapMarker(addMapMarkers(self.mapPointsList()[i]));
   }
 
+  for(var i = 0; i < self.mapPointsList().length; i++){
+    createInfoWindow(self.mapPointsList()[i]);
+  }
+
   // query holds the value of the filter text field
   self.query = ko.observable('');
 
@@ -168,6 +172,7 @@ var ViewModel = function() {
     animateMarker(location.mapMarker());
     // Second I have to perform an ajax request to figure out what the venue ID is and get some basic info.
     getFoursquareInfo(location).done(function(response){
+      // I tend to wonder if I should dump the following code off onto another function, or several functions.
       self.locationName(response.response.venues[0].name);
 
       self.url(response.response.venues[0].url || 'This location does not have a website');
