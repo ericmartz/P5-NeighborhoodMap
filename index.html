@@ -10,38 +10,33 @@
 </head>
 
 <body>
-  <div id="list-view">
-    <section id="place-listing">
-      <h1>Places in Atlanta</h1>
-      <input id="s-input" class="controls" type="search" data-bind="textInput: query, valueUpdate: 'keyup'"></input>
-      <ul data-bind="foreach: search">
-        <li data-bind="text: mapLocation, click: $parent.clickedLocation, $parent.getInfo"></li>
-      </ul>
-    </section>
-    <section id="location-info">
-      <h4>Info from Foursquare for <a data-bind="text: locationName, attr: { href: url }" target="blank"></a></h4>
-      <ul>
-        <li>Rating: <span data-bind="text: rating"></span></li>
-        <li>Cost: <span data-bind="text: costEstimate"></span></li>
-        <li><a data-bind="attr: { href: menu_url }" target="blank">Menu</a></li>
-        <li>Phone Number: <span data-bind="text: phone_num"></span></li>
-        <li>Address: <span data-bind="text: address"></span></li>
-      </ul>
-    </section>
-    <section id="flickr-photos">
-      <ul data-bind="foreach: flickrPhotos">
-        <li><img data-bind="attr: { src: photoURL}"></li>
-      </ul>
-    </section>
+  <div class="flex-container">
+    <div id="map" class="box"></div>
+    <div id="info-display">
+      <div id="place-listing" class="box">
+        <h1>Places in Atlanta</h1>
+        <input id="s-input" class="controls" type="search" data-bind="textInput: query, valueUpdate: 'keyup'"></input>
+        <ul data-bind="foreach: search">
+          <li data-bind="text: mapLocation, click: $parent.clickedLocation, $parent.getInfo"></li>
+        </ul>
+      </div>
+      <div id="location-info" class="box">
+        <h4>Info from Foursquare for <a data-bind="text: locationName, attr: { href: url }" target="blank"></a></h4>
+        <ul>
+          <li>Rating: <span data-bind="text: rating"></span></li>
+          <li>Cost: <span data-bind="text: costEstimate"></span></li>
+          <li><a data-bind="attr: { href: menu_url }" target="blank">Menu</a></li>
+          <li>Phone Number: <span data-bind="text: phone_num"></span></li>
+          <li>Address: <span data-bind="text: address"></span></li>
+        </ul>
+      </div class="box">
+      <div id="flickr-photos" class="box">
+        <ul data-bind="foreach: flickrPhotos">
+          <li><img data-bind="attr: { src: photoURL}"></li>
+        </ul>
+      </div>
+    </div>
   </div>
-  <div id="map"></div>
-
-  <script type="text/javascript">
-    
-      </script>
-
-
-  <!-- <script src="js-frameworks/oauth-signature.js"></script> -->
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDO11YUjfobraQtsvn9WNyXjQs3hkPGugE"></script>
   <script src="js/map.js"></script>
   <script type="text/javascript">initMap();</script>
