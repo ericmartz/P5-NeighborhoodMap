@@ -5,20 +5,20 @@ html, body {
 }
 
 .flex-container {
-    display: flex;
-    flex-wrap: wrap;
-    height: 100%;
-    width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  height: 100%;
+  width: 100%;
 }
 
 .box {
-    width: 100%;
+  width: 100%;
 }
 
 #map {
   float: right;
-  height: 100%; 
-  width: 75%; 
+  height: 50%; 
+  width: 50%; 
 }
 
 /*#info-display {
