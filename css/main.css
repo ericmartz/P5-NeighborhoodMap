@@ -19,12 +19,13 @@ html, body {
 #map {
   float: right;
   height: 50%; 
-  width: 50%; 
+  width: 100%; 
 }
 
 #info-display {
+  font-size: 1.5em;
   float: left;
-  width: 50%;
+  width: 100%;
 }
 
 ul {
