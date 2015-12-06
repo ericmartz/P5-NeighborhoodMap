@@ -21,7 +21,7 @@
           <li data-bind="text: mapLocation, click: $parent.clickedLocation, $parent.getInfo"></li>
         </ul>
       </div>
-      <div id="location-info" class="box">
+      <div id="location-info" class="box" data-bind="visible: shouldShowInfo">
         <h4 class="title">Info from Foursquare for <a data-bind="text: locationName, attr: { href: url }" target="blank"></a></h4>
         <ul>
           <li>Rating: <span data-bind="text: rating"></span></li>
@@ -31,7 +31,7 @@
           <li>Address: <span data-bind="text: address"></span></li>
         </ul>
       </div class="box">
-      <div id="flickr-photos" class="box">
+      <div id="flickr-photos" class="box" data-bind="visible: shouldShowInfo">
         <ul data-bind="foreach: flickrPhotos">
           <li><img data-bind="attr: { src: photoURL}"></li>
         </ul>

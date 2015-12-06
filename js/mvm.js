@@ -113,6 +113,9 @@ var ViewModel = function() {
   // flickrPhotos is an observable array that updates the photos obtained from Flickr
   self.flickrPhotos = ko.observableArray([]);
 
+  // shouldShowInfo is used to determine if the div's that display the AJAX info are visible.
+  self.shouldShowInfo = ko.observable(false);
+
   // The following variables are used to update the view when a location is clicked.
   // Each observable holds data to display that is received from Foursquare
   self.rating = ko.observable();
@@ -172,9 +175,11 @@ var ViewModel = function() {
 
   // clickedLocation is used to control what actions are taken when the user clicks on one of the locations.
   self.clickedLocation = function(location){
-    // First I animate the marker to draw attention to it once clicked.
+    // First make div's showing AJAX info visible.
+    self.shouldShowInfo(true);
+    // I animate the marker to draw attention to it once clicked.
     animateMarker(location.mapMarker());
-    // Second I have to perform an ajax request to figure out what the venue ID is and get some basic info.
+    // I have to perform an ajax request to figure out what the venue ID is and get some basic info.
     getFoursquareInfo(location).done(function(response){
       // I tend to wonder if I should dump the following code off onto another function, or several functions.
       self.locationName(response.response.venues[0].name);
