@@ -8,7 +8,7 @@ var infoWindow = new google.maps.InfoWindow();
 // So yeah, I am just being silly, but there's got to be a better way to do this.
 var NOT_MY_CLIENT_ID = 'YE5DKRXUZGLVI5CJZI45W4GKF1BF0UL3C3IQMBRZISWKCQN0';
 var NOT_MY_CLIENT_SECRET = 'AKMFW32DAPSPQ5MX4YMHV2VKPCID3VLPWIUZADQ3BVENC3VH';
-var NOT_MY_FLICKR_API = 'c2324d1f98f8a7729e48a3261c1c4f27'
+var NOT_MY_FLICKR_API = 'c2324d1f98f8a7729e48a3261c1c4f27';
 
 var FOURSQUARE_BASE_URL = 'https://api.foursquare.com/v2/venues/';
 var FLICKR_BASE_URL = 'https://api.flickr.com/services/rest/?';
@@ -28,7 +28,7 @@ function setInfoWindowContent(header, content, address) {
   var imgURL = 'https://maps.googleapis.com/maps/api/streetview?size=300x150&location=' + address;
   windowContent += '<h3>' + header + '</h3>';
   windowContent += '<p>' + content + '</p>';
-  windowContent += '<img src="' + imgURL + '">'
+  windowContent += '<img src="' + imgURL + '">';
   return windowContent;
 }
 
@@ -134,7 +134,6 @@ function getFlickrInfo(location) {
 
   var flickrURL = FLICKR_BASE_URL + 'method=flickr.photos.search&api_key=' + NOT_MY_FLICKR_API + '&text=' + place + ', atlanta&format=json&nojsoncallback=1&per_page=5';
 
-  console.log(flickrURL);
   return $.getJSON(flickrURL, function(data){});
 }
 

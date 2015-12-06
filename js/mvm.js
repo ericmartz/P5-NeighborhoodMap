@@ -1,3 +1,7 @@
+// Messages displayed when there was a failure with the AJAX request
+var FOURSQUARE_AJAX_FAILURE = 'Something went wrong with the Foursquare request.  No worries, the problem is most likely me, not you. You can always try again later.'
+var FLICKR_AJAX_FAILURE = 'Something went wrong with the Flickr request.  No worries, the problem is most likely me, not you. You can always try again later.'
+
 // So I would rather use the geocoding to have an address and find the latitude/longitude,
 // but I started out hardcoding the lat/long just because I thought it would be best to start simply.
 var mapPoints = [
@@ -81,7 +85,7 @@ var mapPoints = [
     longitude: -84.38494,
     note: 'A fine little museum in Atlanta. Not much compared to museums in Chicago, New York or Washington D.C., but a good place to visit if you live in Atlanta.'
   },
-]
+];
 
 // I was a little unsure on this, but I see the individual MapPoints as my model.  
 // Below, in the ViewModel I create a mapPointsList, which is an observableArray.
@@ -98,7 +102,7 @@ var MapPoint = function(data) {
   this.mapLongitude = ko.observable(data.longitude);
   this.mapNote = ko.observable(data.note);
   this.mapMarker = ko.observable();
-}
+};
 
 var ViewModel = function() {
   var self = this;
@@ -130,7 +134,7 @@ var ViewModel = function() {
     self.mapPointsList()[i].mapMarker(addMapMarkers(self.mapPointsList()[i]));
   }
 
-  for(var i = 0; i < self.mapPointsList().length; i++){
+  for(i = 0; i < self.mapPointsList().length; i++){
     createInfoWindow(self.mapPointsList()[i]);
   }
 
@@ -184,11 +188,16 @@ var ViewModel = function() {
       getFoursquareDetail(response.response.venues[0].id).done(function(response){
         self.costEstimate(response.response.venue.price ? response.response.venue.price.message : 'This location does not have a price estimate');
         self.rating(response.response.venue.rating || 'This location does not have a rating');
+      }).fail(function(e){
+         window.alert(FOURSQUARE_AJAX_FAILURE);
       });
+    }).fail(function(e){
+      window.alert(FOURSQUARE_AJAX_FAILURE);
     });
 
     // Finally I send off a request to get a list of pictures from Flickr
     getFlickrInfo(location).done(function(response){
+      console.log(response);
       var photoArray = response.photos.photo;
       var photo;
 
@@ -201,12 +210,16 @@ var ViewModel = function() {
         getFlickrPhotoURL(photoArray[i].id).done(function(response){
           photo = {
             photoURL : response.sizes.size[4].source
-          }
-          self.flickrPhotos.push(photo);
+          };
+          self.flickrPhotos.push(photo || 'No photo available');
+        }).fail(function(){
+          window.alert(FLICKR_AJAX_FAILURE);
         });
       }
+    }).fail(function(){
+      window.alert(FLICKR_AJAX_FAILURE);
     });
   };
-}
+};
 
 ko.applyBindings(new ViewModel());

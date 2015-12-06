@@ -37,7 +37,6 @@
         </ul>
       </div>
     </div>
-    <div>Icons made by <a href="http://www.flaticon.com/authors/simpleicon" title="SimpleIcon">SimpleIcon</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a></div>
   </div>
 
   <!-- 
@@ -53,6 +52,11 @@
     <script src="js/mvm.js"></script>
   -->
 
+  <!-- 
+    Originally, initMap was in the map.js file.  However, I took it out and added a callback to the
+    Google Maps API script.  I did this so I could defer the loading of both the Google Maps API
+    and the production.min.js file.
+  -->
   <script type="text/javascript">
     function initMap() {
     // Create a map object and specify the DOM element for display.
@@ -67,7 +71,4 @@
   <script src="js/build/production.min.js" defer></script>
 
 </body>
-
-  
-
 </html>
