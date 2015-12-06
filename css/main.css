@@ -28,10 +28,20 @@ html, body {
   width: 100%;
 }
 
+#title {
+  font-size: 1em;
+}
+
+#instructions {
+  font-size: .25em;
+  color: #bdc3c7;
+  text-align: center;
+}
+
 #search {
   border: 1px solid #bdc3c7;
   border-radius: 4px;
-  width: 33%;
+  width: 75%;
   height: 3em;
   text-align: center;
   color: #bdc3c7;

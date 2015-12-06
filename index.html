@@ -16,8 +16,9 @@
     <div id="map" class="box"></div>
     <div id="info-display"  class="box">
       <div id="place-listing" class="box">
-        <h1>Some Cool Places in Atlanta</h1>
+        <h1 id="title">Some Cool Places in Atlanta</h1>
         <center><input id="search" class="controls" type="search" data-bind="textInput: query, valueUpdate: 'keyup'"></input></center>
+        <p id="instructions">Use the text box above to filter list of Cool Places in Atlanta.  Click on a Place to obtain information from Foursquare and pictures from Flickr.  Markers also contain a note from Eric and Google's Street View picture.</p>
         <ul data-bind="foreach: search">
           <li data-bind="text: mapLocation, click: $parent.clickedLocation, $parent.getInfo"></li>
         </ul>
