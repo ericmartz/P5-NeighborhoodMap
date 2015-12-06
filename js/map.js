@@ -134,7 +134,6 @@ function getFlickrInfo(location) {
 
   var flickrURL = FLICKR_BASE_URL + 'method=flickr.photos.search&api_key=' + NOT_MY_FLICKR_API + '&text=' + place + ', atlanta&format=json&nojsoncallback=1&per_page=5';
 
-  console.log(flickrURL);
   return $.getJSON(flickrURL, function(data){});
 }
 
