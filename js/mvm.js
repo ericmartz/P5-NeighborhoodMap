@@ -81,7 +81,7 @@ var mapPoints = [
     longitude: -84.38494,
     note: 'A fine little museum in Atlanta. Not much compared to museums in Chicago, New York or Washington D.C., but a good place to visit if you live in Atlanta.'
   },
-]
+];
 
 // I was a little unsure on this, but I see the individual MapPoints as my model.  
 // Below, in the ViewModel I create a mapPointsList, which is an observableArray.
@@ -98,7 +98,7 @@ var MapPoint = function(data) {
   this.mapLongitude = ko.observable(data.longitude);
   this.mapNote = ko.observable(data.note);
   this.mapMarker = ko.observable();
-}
+};
 
 var ViewModel = function() {
   var self = this;
@@ -130,7 +130,7 @@ var ViewModel = function() {
     self.mapPointsList()[i].mapMarker(addMapMarkers(self.mapPointsList()[i]));
   }
 
-  for(var i = 0; i < self.mapPointsList().length; i++){
+  for(i = 0; i < self.mapPointsList().length; i++){
     createInfoWindow(self.mapPointsList()[i]);
   }
 
@@ -201,12 +201,12 @@ var ViewModel = function() {
         getFlickrPhotoURL(photoArray[i].id).done(function(response){
           photo = {
             photoURL : response.sizes.size[4].source
-          }
+          };
           self.flickrPhotos.push(photo);
         });
       }
     });
   };
-}
+};
 
 ko.applyBindings(new ViewModel());
