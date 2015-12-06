@@ -2,6 +2,7 @@
   "name": "udacity-project5",
   "version": "0.1.0",
   "devDependencies": {
-    "grunt": "~0.4.1"
+    "grunt": "~0.4.1",
+    "grunt-contrib-concat": "^0.5.1"
   }
 }
