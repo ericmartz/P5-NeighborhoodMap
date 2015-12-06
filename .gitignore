@@ -12,3 +12,7 @@ tmp/*
 # I'm not ignoring images
 
 !.gitignore
+
+#ignoring node and grunt modules
+/node_modules
+node_modules/*
