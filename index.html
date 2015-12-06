@@ -41,13 +41,21 @@
     <div>Icons made by <a href="http://www.flaticon.com/authors/simpleicon" title="SimpleIcon">SimpleIcon</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a></div>
   </div>
 
-  <script src="js-frameworks/jquery-1.11.3.min.js"></script>
-  <script src="js-frameworks/knockout.js"></script>
+  <!-- 
+    Ok, so this was originally the JS I was using, but I am now using grunt-contrib-concat to put all the
+    files together.  So further down you will see the script tag I am using.
+    <script src="js-frameworks/jquery-1.11.3.min.js"></script>
+    <script src="js-frameworks/knockout.js"></script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDO11YUjfobraQtsvn9WNyXjQs3hkPGugE"></script>
+    <script src="js/map.js"></script>
+    <script type="text/javascript">initMap();</script>
+    <script src="js/mvm.js"></script>
+  -->
 
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDO11YUjfobraQtsvn9WNyXjQs3hkPGugE"></script>
-  <script src="js/map.js"></script>
-  <script type="text/javascript">initMap();</script>
-  <script src="js/mvm.js"></script>
+  <script src="js/build/production.js"></script>
+
 </body>
 
   
