@@ -160,14 +160,14 @@ function createInfoWindow(mapPoint) {
   });
 }
 
-function initMap() {
-  // Create a map object and specify the DOM element for display.
-  map = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: 33.74900, lng: -84.38798},
-    scrollwheel: false  // Why? Because I hate when I am scrolling a site and suddenly grab the map 
-                        // it starts to zoom in or out.  
-  });
-}
+// function initMap() {
+//   // Create a map object and specify the DOM element for display.
+//   map = new google.maps.Map(document.getElementById('map'), {
+//     center: {lat: 33.74900, lng: -84.38798},
+//     scrollwheel: false  // Why? Because I hate when I am scrolling a site and suddenly grab the map 
+//                         // it starts to zoom in or out.  
+//   });
+// }
 
 function addMapMarkers(mapPoint){
 
@@ -265,7 +265,6 @@ function getFlickrPhotoURL(photoID){
 
   return $.getJSON(flickrPhotoURLs, function(data){});
 }
-initMap();
 // So I would rather use the geocoding to have an address and find the latitude/longitude,
 // but I started out hardcoding the lat/long just because I thought it would be best to start simply.
 var mapPoints = [

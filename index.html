@@ -53,8 +53,18 @@
     <script src="js/mvm.js"></script>
   -->
 
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDO11YUjfobraQtsvn9WNyXjQs3hkPGugE"></script>
-  <script async src="js/build/production.min.js"></script>
+  <script type="text/javascript">
+    function initMap() {
+    // Create a map object and specify the DOM element for display.
+    map = new google.maps.Map(document.getElementById('map'), {
+      center: {lat: 33.74900, lng: -84.38798},
+      scrollwheel: false  // Why? Because I hate when I am scrolling a site and suddenly grab the map 
+                          // it starts to zoom in or out.  
+    });
+  }
+  </script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDO11YUjfobraQtsvn9WNyXjQs3hkPGugE&callback=initMap" defer></script>
+  <script src="js/build/production.min.js" defer></script>
 
 </body>
 
