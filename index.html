@@ -16,8 +16,8 @@
     <div id="map" class="box"></div>
     <div id="info-display"  class="box">
       <div id="place-listing" class="box">
-        <h1>Places in Atlanta</h1>
-        <input id="s-input" class="controls" type="search" data-bind="textInput: query, valueUpdate: 'keyup'"></input>
+        <h1>Some Cool Places in Atlanta</h1>
+        <center><input id="search" class="controls" type="search" data-bind="textInput: query, valueUpdate: 'keyup'"></input></center>
         <ul data-bind="foreach: search">
           <li data-bind="text: mapLocation, click: $parent.clickedLocation, $parent.getInfo"></li>
         </ul>
@@ -38,6 +38,7 @@
         </ul>
       </div>
     </div>
+    <div>Icons made by <a href="http://www.flaticon.com/authors/simpleicon" title="SimpleIcon">SimpleIcon</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a></div>
   </div>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDO11YUjfobraQtsvn9WNyXjQs3hkPGugE"></script>
   <script src="js/map.js"></script>
