@@ -216,6 +216,7 @@ function stopMarkerAnimation(marker, timeout){
     marker.setAnimation(null); 
   }, timeout);
 }
+
 // Not sure why I did this here.  Since the file is map.js.  I think I am going to end up renaming
 // this file helper.js and it can just be helper functions.
 // Or maybe move this to another file called ajax.js or requests.js and move this function there.

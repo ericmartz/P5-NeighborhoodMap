@@ -144,3 +144,4 @@ function getFlickrPhotoURL(photoID){
 
   return $.getJSON(flickrPhotoURLs, function(data){});
 }
+initMap();
