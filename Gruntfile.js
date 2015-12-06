@@ -7,8 +7,8 @@ module.exports = function(grunt) {
         concat: {
             dist: {
                 src: [
-                    'js-frameworks/*.js', // All JS in the libs folder
-                    'js/*.js'  // This specific file
+                    'js-frameworks/*.js',
+                    'js/*.js'
                 ],
                 dest: 'js/build/production.js',
             }
@@ -19,6 +19,18 @@ module.exports = function(grunt) {
                 src: 'js/build/production.js',
                 dest: 'js/build/production.min.js'
             }
+        },
+
+        cssmin: {
+          options: {
+            shorthandCompacting: false,
+            roundingPrecision: -1
+          },
+          target: {
+            files: {
+              'css/production.min.css': ['css/main.css']
+            }
+          }
         }
 
     });
@@ -26,8 +38,9 @@ module.exports = function(grunt) {
     // 3. Where we tell Grunt we plan to use this plug-in.
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
 
     // 4. Where we tell Grunt what to do when we type "grunt" into the terminal.
-    grunt.registerTask('default', ['concat', 'uglify']);
+    grunt.registerTask('default', ['concat', 'uglify', 'cssmin']);
 
 };
