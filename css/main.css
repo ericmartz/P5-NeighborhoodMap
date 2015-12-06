@@ -12,23 +12,17 @@ html, body {
   width: 100%;
 }
 
-.box {
-  width: 100%;
-}
-
 #map {
-  float: right;
   height: 50%; 
   width: 100%; 
 }
 
 #info-display {
   font-size: 3em;
-  float: left;
   width: 100%;
 }
 
-#title {
+.title {
   font-size: 1em;
 }
 
@@ -39,16 +33,40 @@ html, body {
 }
 
 #search {
+  display: block;
+  margin: 0 auto;
   border: 1px solid #bdc3c7;
   border-radius: 4px;
   width: 75%;
   height: 3em;
   text-align: center;
-  color: #bdc3c7;
 }
 
 ul {
   list-style-type: none;
 }
 
-h1 {text-align: center;}
+h1, h4 {text-align: center;}
+
+@media screen and (min-width: 768px) {
+  #map {
+    float: left;
+    height: 100%; 
+    width: 66%; 
+  }
+
+  #info-display {
+    float: right;
+    font-size: 1em;
+    width: 33%;
+  }
+
+  .title {
+    font-size: 2em;
+  }
+
+  #instructions {
+    font-size: 1em;
+    padding: .5em;
+  }
+}
