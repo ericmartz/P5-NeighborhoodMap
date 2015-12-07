@@ -52,23 +52,10 @@
     <script src="js/mvm.js"></script>
   -->
 
-  <!-- 
-    Originally, initMap was in the map.js file.  However, I took it out and added a callback to the
-    Google Maps API script.  I did this so I could defer the loading of both the Google Maps API
-    and the production.min.js file.
-  -->
-  <script type="text/javascript">
-    function initMap() {
-    // Create a map object and specify the DOM element for display.
-    map = new google.maps.Map(document.getElementById('map'), {
-      center: {lat: 33.74900, lng: -84.38798},
-      scrollwheel: false  // Why? Because I hate when I am scrolling a site and suddenly grab the map 
-                          // it starts to zoom in or out.  
-    });
-  }
-  </script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDO11YUjfobraQtsvn9WNyXjQs3hkPGugE&callback=initMap" defer></script>
   <script src="js/build/production.min.js" defer></script>
+
+  <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDO11YUjfobraQtsvn9WNyXjQs3hkPGugE&callback=initMap" onerror="mapLoadError"></script>
+  
 
 </body>
 </html>

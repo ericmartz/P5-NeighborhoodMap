@@ -121,8 +121,9 @@ e,f,k){k=k||w;f=f||{};if(2>a)throw Error("Your version of jQuery.tmpl is too old
 a+" })()) }}"};this.addTemplate=function(a,b){w.write("<script type='text/html' id='"+a+"'>"+b+"\x3c/script>")};0<a&&(u.tmpl.tag.ko_code={open:"__.push($1 || '');"},u.tmpl.tag.ko_with={open:"with($1) {",close:"} "})};a.Ya.prototype=new a.J;var b=new a.Ya;0<b.uc&&a.hb(b);a.b("jqueryTmplTemplateEngine",a.Ya)})()})})();})();
 var map;
 var mapMarkers = [];
-var bounds = new google.maps.LatLngBounds();
-var infoWindow = new google.maps.InfoWindow();
+var bounds;
+var infoWindow;
+var vm;
 
 // So I figure storing a client ID and client secret in a JS file like this is probably a worst practice.
 // So in the spirit of security by obfuscation (which is also a worst practice), I am prefixing these variables with NOT_MY to fool all those bad guys out there.
@@ -133,6 +134,36 @@ var NOT_MY_FLICKR_API = 'c2324d1f98f8a7729e48a3261c1c4f27';
 
 var FOURSQUARE_BASE_URL = 'https://api.foursquare.com/v2/venues/';
 var FLICKR_BASE_URL = 'https://api.flickr.com/services/rest/?';
+
+function initMap() {
+  // Create a map object and specify the DOM element for display.
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: 33.74900, lng: -84.38798},
+    scrollwheel: false  // Why? Because I hate when I am scrolling a site and suddenly grab the map 
+                        // it starts to zoom in or out.  
+  });
+
+  // Originally, these variables were declared and assigned above where the variables are just declared in lines 1-4
+  // I had to move the assigning of variables here, but keep the declarations above to get this to work.
+  // As far as I can tell, it is because the map api is declared after map.js is parsed by the browser.  So 'google' is not yet defined as 
+  // a variable.  But I needed bounds and infoWindows to be available as global variables.
+  // Maybe not a best practice, but it works.
+  bounds = new google.maps.LatLngBounds();
+  infoWindow = new google.maps.InfoWindow();
+
+  // Originally the two lines below was just one:
+  // ko.applyBindings(new ViewModel);
+  // However, I needed to call clickedLocation in the VieWModel from my maps.even.addListener() (on line 66)
+  // I looked at several stackoverflow questions, but this is the one that made it click:
+  // http://stackoverflow.com/questions/26047660/calling-function-in-knockout-js-from-outside-view-model
+  // Now the question I have to find out is if adding my ViewModel to the Window object is kosher :-/
+  window.vm = new ViewModel();
+  ko.applyBindings(window.vm);
+}
+
+function mapLoadError(){
+  window.alert('There was a problem loading the map.  Sorry, try again later');
+}
 
 // Not sure what I am doing here is entirely in line with the project.
 // I am setting the content for each infoWindow manually.  
@@ -153,8 +184,15 @@ function setInfoWindowContent(header, content, address) {
   return windowContent;
 }
 
+// createInfoWindow() adds the click event of the marker to the event listener.
+// It fires off the animateMarker function
+// Then it fires off the clickedLocation function
+// And then it sets the content
+// And then it opens the infoWindow
 function createInfoWindow(mapPoint) {
   google.maps.event.addListener(mapPoint.mapMarker(), 'click', function() {
+    animateMarker(mapPoint.mapMarker());
+    window.vm.clickedLocation(mapPoint);
     infoWindow.setContent(setInfoWindowContent(mapPoint.mapLocation(), mapPoint.mapNote(), mapPoint.mapLocationAddress()));
     infoWindow.open(map, mapPoint.mapMarker());
   });
@@ -492,5 +530,3 @@ var ViewModel = function() {
     });
   };
 };
-
-ko.applyBindings(new ViewModel());
