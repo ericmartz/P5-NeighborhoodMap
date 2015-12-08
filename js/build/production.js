@@ -303,8 +303,8 @@ function getFlickrPhotoURL(photoID){
   return $.getJSON(flickrPhotoURLs, function(data){});
 }
 // Messages displayed when there was a failure with the AJAX request
-var FOURSQUARE_AJAX_FAILURE = 'Something went wrong with the Foursquare request.  No worries, the problem is most likely me, not you. You can always try again later.'
-var FLICKR_AJAX_FAILURE = 'Something went wrong with the Flickr request.  No worries, the problem is most likely me, not you. You can always try again later.'
+var FOURSQUARE_AJAX_FAILURE = 'Something went wrong with the Foursquare request.  No worries, the problem is most likely me, not you. You can always try again later.';
+var FLICKR_AJAX_FAILURE = 'Something went wrong with the Flickr request.  No worries, the problem is most likely me, not you. You can always try again later.';
 
 // So I would rather use the geocoding to have an address and find the latitude/longitude,
 // but I started out hardcoding the lat/long just because I thought it would be best to start simply.

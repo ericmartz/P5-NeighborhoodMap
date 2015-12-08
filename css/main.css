@@ -63,13 +63,13 @@ img {
 
 @media screen and (min-width: 768px) {
   #map {
-    float: left;
+    order: 1;
     height: 100%; 
     width: 66%; 
   }
 
   #info-display {
-    float: right;
+    order: 2;
     font-size: 1em;
     width: 33%;
   }
