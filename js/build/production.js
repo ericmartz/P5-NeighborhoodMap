@@ -484,7 +484,7 @@ var ViewModel = function() {
     // I animate the marker to draw attention to it once clicked.
     animateMarker(location.mapMarker());
     console.log(location.mapMarker());
-    // google.maps.event.trigger(location.mapMarker(), 'click');
+    google.maps.event.trigger(location.mapMarker(), 'click');
     // I have to perform an ajax request to figure out what the venue ID is and get some basic info.
     getFoursquareInfo(location).done(function(response){
       // I tend to wonder if I should dump the following code off onto another function, or several functions.
