@@ -179,7 +179,7 @@ var ViewModel = function() {
     self.shouldShowInfo(true);
     // I animate the marker to draw attention to it once clicked.
     animateMarker(location.mapMarker());
-    // console.log(location.mapMarker());
+    console.log(location.mapMarker());
     // google.maps.event.trigger(location.mapMarker(), 'click');
     // I have to perform an ajax request to figure out what the venue ID is and get some basic info.
     getFoursquareInfo(location).done(function(response){
@@ -204,7 +204,6 @@ var ViewModel = function() {
 
     // Finally I send off a request to get a list of pictures from Flickr
     getFlickrInfo(location).done(function(response){
-      console.log(response);
       var photoArray = response.photos.photo;
       var photo;
 
