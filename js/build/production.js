@@ -192,7 +192,7 @@ function setInfoWindowContent(header, content, address) {
 function createInfoWindow(mapPoint) {
   google.maps.event.addListener(mapPoint.mapMarker(), 'click', function() {
     animateMarker(mapPoint.mapMarker());
-    window.vm.clickedLocation(mapPoint);
+    window.vm.handleInfoRequests(mapPoint);
     infoWindow.setContent(setInfoWindowContent(mapPoint.mapLocation(), mapPoint.mapNote(), mapPoint.mapLocationAddress()));
     infoWindow.open(map, mapPoint.mapMarker());
   });
@@ -477,8 +477,20 @@ var ViewModel = function() {
     }
   });
 
-  // clickedLocation is used to control what actions are taken when the user clicks on one of the locations.
+  // An explaination about the next two functions clickedLocation and handleInfoRequests.
+  // The explaination is here because I made a change due to reviewers comments and I wanted the next reviewer to know the story.
+  // handleInfoRequests was originally called clickedLocation, but the map functionality wasn't quite up to spec.
+  // So I created a new clickedLocation that accepted the location clicked and fired off a google maps event trigger
+  // for the marker being clicked.  I renamed the old clickedLocation handleInfoRequests and updated the marker click
+  // to fire off this newly renamed function.  All seems to be working now!
+
+  // clickedLocation receives the location clicked by the user and then fires off a google maps event trigger for a map marker click
   self.clickedLocation = function(location){
+    google.maps.event.trigger(location.mapMarker(), 'click');
+  }
+
+  // clickedLocation is used to control what actions are taken when the user clicks on one of the locations.
+  self.handleInfoRequests = function(location){
     // First make div's showing AJAX info visible.
     self.shouldShowInfo(true);
     // I animate the marker to draw attention to it once clicked.

@@ -71,7 +71,7 @@ function setInfoWindowContent(header, content, address) {
 function createInfoWindow(mapPoint) {
   google.maps.event.addListener(mapPoint.mapMarker(), 'click', function() {
     animateMarker(mapPoint.mapMarker());
-    window.vm.clickedLocation(mapPoint);
+    window.vm.handleInfoRequests(mapPoint);
     infoWindow.setContent(setInfoWindowContent(mapPoint.mapLocation(), mapPoint.mapNote(), mapPoint.mapLocationAddress()));
     infoWindow.open(map, mapPoint.mapMarker());
   });
