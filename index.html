@@ -32,7 +32,7 @@
       </div class="box">
       <div id="flickr-photos" class="box" data-bind="visible: shouldShowInfo">
         <ul data-bind="foreach: flickrPhotos">
-          <li><img data-bind="attr: { src: photoURL}"></li>
+          <li><img data-bind="attr: { src: photoURL }"></li>
         </ul>
       </div>
     </div>
@@ -53,8 +53,7 @@
 
   <script src="js/build/production.min.js" defer></script>
 
-  <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDO11YUjfobraQtsvn9WNyXjQs3hkPGugE&callback=initMap" onerror="mapLoadError"></script>
-  
+  <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDO11YUjfobraQtsvn9WNyXjQs3hkPGugE&callback=initMap" onerror="mapLoadError()"></script>
 
 </body>
 </html>

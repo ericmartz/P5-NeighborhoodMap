@@ -105,6 +105,7 @@ var MapPoint = function(data) {
 };
 
 var ViewModel = function() {
+
   var self = this;
 
   // KO Observable Array to hold MapPoints for search and displaying markers
