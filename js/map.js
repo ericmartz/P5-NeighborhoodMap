@@ -14,7 +14,8 @@ var NOT_MY_FLICKR_API = 'c2324d1f98f8a7729e48a3261c1c4f27';
 var FOURSQUARE_BASE_URL = 'https://api.foursquare.com/v2/venues/';
 var FLICKR_BASE_URL = 'https://api.flickr.com/services/rest/?';
 
-function initMap() {
+// Had to add initMap to the window object to get this working.  :-/
+window.initMap = function() {
   // Create a map object and specify the DOM element for display.
   map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 33.74900, lng: -84.38798},
